@@ -1,0 +1,1 @@
+# odoo_module_mail_request_sign
