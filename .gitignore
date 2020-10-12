@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+*.py[co]
 *.py[cod]
 *$py.class
 
@@ -68,6 +69,9 @@ instance/
 # Scrapy stuff:
 .scrapy
 
+# Sphinx build directories
+_build/
+
 # Sphinx documentation
 docs/_build/
 
@@ -127,3 +131,42 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# dotfiles
+.*
+!.gitignore
+!.github
+!.mailmap
+
+# emacs backup files
+*~
+# hg stuff
+*.orig
+status
+
+# odoo filestore
+odoo/filestore
+# maintenance migration scripts
+odoo/addons/base/maintenance
+
+# generated for windows installer?
+install/win32/*.bat
+install/win32/meta.py
+
+# needed only when building for win32
+setup/win32/static/less/
+setup/win32/static/wkhtmltopdf/
+setup/win32/static/postgresql*.exe
+
+# various virtualenv
+/bin/
+/build/
+/dist/
+/include/
+/lib/
+/man/
+/share/
+/src/
+
+# jetbrains
+.idea
