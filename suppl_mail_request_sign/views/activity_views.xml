@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!--
+    Copyright (c) SUPPLIoT GmbH.
+
+    This file is part of Request Document Sign module by SUPPLIoT
+    (see https://suppliot.eu).
+
+    See LICENSE file for full copyright and licensing details.
+-->
+
+<odoo>
+    <record id="suppl_mail_request_sign.mail_activity_view_form_popup" model="ir.ui.view">
+        <field name="name">mail.activity.view.form.popup.inherit.suppl_mail_request_sign</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail.mail_activity_view_form_popup"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='note']" position="before">
+                <group attrs="{'invisible': [('activity_category', '!=', 'sign_document')]}" col="2">
+                    <field name="request_sign_template_id" attrs="{'required': [('activity_category', '=', 'sign_document')]}"/>
+
+                    <field colspan="2"
+                           attrs="{'required': [('activity_category', '=', 'sign_document')]}"
+                           name="request_sign_signer_ids" placeholder="Write email or search contact..." nolabel="1" class="o_sign_flat_o2m">
+                        <tree editable="bottom" create="false" delete="false">
+                            <field name="role_id" force_save="1" options="{'no_open': True}"/>
+                            <field name="partner_id" placeholder="Name or email..." context="{'force_email': True, 'show_email': True}"/>
+                        </tree>
+                    </field>
+
+                    <field name="request_sign_follower_ids" widget="many2many_tags" placeholder="Write email or search contact..." context="{'show_email': True}"/>
+                </group>
+            </xpath>
+
+            <xpath expr="//field[@name='note']" position="after">
+                <field name="request_sign_filename" attrs="{'invisible': [('activity_category', '!=', 'sign_document')]}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='note']" position="attributes">
+                <attribute name="attrs"></attribute>
+                <field name="request_sign_filename" attrs="{'invisible': [('activity_category', '!=', 'sign_document')]}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='note']" position="after">
+                <button string="Discard" class="btn-secondary" special="cancel" />
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

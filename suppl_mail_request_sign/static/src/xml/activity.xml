@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (c) SUPPLIoT GmbH.
+
+    This file is part of Request Document Sign module by SUPPLIoT
+    (see https://suppliot.eu).
+
+    See LICENSE file for full copyright and licensing details.
+-->
+
+<templates xml:space="preserve">
+    <t t-name="suppl_mail_request_sign.Activity" t-inherit="mail.Activity" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_Activity_tools')]" position="before">
+            <div t-if="activity.category === 'sign_document' &amp;&amp; activity.request_sign_item_infos" class="o_signers column my-1">
+                <div t-foreach="activity.request_sign_item_infos" t-as="request_item_info"
+                     t-att-class="(request_item_info.state === 'completed') ? 'o_sign_completed col' : 'o_sign_waiting col'">
+                        <input t-att-checked="(request_item_info.state === 'completed') ? 'checked' : undefined" class="mt-1 mr-1" type="checkbox"
+                               disabled="True"/>
+                    <span>
+                        <t t-esc="request_item_info.partner_name"/>
+                        <t t-if="request_item_info.signing_date" class="ml-1" t-esc="' ' + request_item_info.signing_date"/>
+                    </span>
+                </div>
+                <div class="my-1 col">
+                    <a href="#" data-oe-model='sign.request' t-att-data-oe-id='activity.request_sign_request_id[0]'>
+                        <i class="fa fa-external-link"></i>
+                        Open Sign Request
+                    </a>
+                </div>
+            </div>
+        </xpath>
+    </t>
+</templates>
